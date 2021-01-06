@@ -1,0 +1,35 @@
+@page "/products/{Id:int}"
+@inject NavigationManager NavigationManager
+
+<h1>A specific product</h1>
+
+This is for id @Id
+
+<div>
+    Here is the product: @product.Name
+</div>
+
+<div>
+    <NavLink href="products" target="_blank">Products</NavLink>
+</div>
+
+<button class="btn btn-primary" @onclick="Navigate">
+    Navigate to products
+</button>
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    Data.Product product = null;
+
+    protected override void OnParametersSet()
+    {
+        product = Data.Products.GetProduct(Id);
+    }
+
+    private void Navigate()
+    {
+        NavigationManager.NavigateTo("products");
+    }
+}

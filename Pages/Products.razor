@@ -1,0 +1,20 @@
+@page "/products"
+@inject NavigationManager NavigationManager
+
+<h1>Products</h1>
+
+@foreach (var product in products)
+{
+    <div>
+        <NavLink href="@product.Url" target="_blank">@product.Name</NavLink>
+    </div>
+}
+
+@code{
+    List<Data.Product> products;
+    
+    protected override void OnInitialized()
+    {
+        this.products = Data.Products.GetProducts();
+    }
+}
